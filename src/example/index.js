@@ -7,9 +7,11 @@ import {
   Redirect
 } from "react-router-dom";
 import Loadable from "react-loadable";
+import { hot } from "react-hot-loader";
 import { getCommonName } from "./common";
 import styles from "./index.less";
 import Loading from "./Loading";
+
 const LoadableComponent = Loadable({
   loader: () => import("./Topic"),
   loading: Loading
@@ -51,7 +53,7 @@ export const Topics = ({ match }) => (
   </div>
 );
 
-export default class TestLayout extends React.Component {
+class TestLayout extends React.Component {
   static childContextTypes = {
     onLogin: PropTypes.func
   };
@@ -96,7 +98,7 @@ export default class TestLayout extends React.Component {
               <Link to="/">{getCommonName(SERVICE_URL)}</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about">asdasdasd</Link>
             </li>
             <li>
               <Link to="/topics">Topics</Link>
@@ -165,9 +167,11 @@ class Login extends React.Component {
 
     return (
       <div>
-        <p>You must log in to view the page at {from.pathname}</p>
+        <p>You must log in to view the page asdasd at {from.pathname}</p>
         <button onClick={this.login}>Log in</button>
       </div>
     );
   }
 }
+
+export default hot(module)(TestLayout);

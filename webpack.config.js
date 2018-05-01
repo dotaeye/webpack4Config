@@ -23,6 +23,10 @@ const minimizeCssOptions = {
 module.exports = (env, options) => {
   const isProduct = options.mode === "production";
   return {
+    // entry: [
+    //   "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000",
+    //   "./src/index.js"
+    // ],
     output: {
       path: SOURCE_DIR,
       filename: "[name].js",
@@ -105,12 +109,17 @@ module.exports = (env, options) => {
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css"
-      })
+      }),
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.NamedModulesPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin()
     ],
     devServer: {
       contentBase: SOURCE_DIR,
       historyApiFallback: true,
       compress: true,
+      hot: true,
       port
     }
   };
